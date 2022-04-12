@@ -48,21 +48,34 @@ class PostController extends Controller
             'posts' => $post,
         ]);
     }
-
+    //to edit a post
     public function edit($post)
     {
         $singlePost = Post::findOrFail($post);
         return view('posts.edit', [
-            'post' => $post
+            'post' => $singlePost
         ]);
     }
+    //update a post
+    public function update($post)
+    {
+        $singlePost = Post::findOrFail($post);
+        $data = request()->all();
+        $singlePost->update(
+            [
+                'title' => $data['title'],
+                'description' => $data['description'],
+                // 'user_id' => $data['post_creator'],
+            ]
+        );
+        return to_route('posts.index');
+    }
+
     //delete a post
     public function destroy($post)
     {
-        // unset($this->posts[$id]);
-        // return view('posts.index', ['allPosts' => $this->posts]);
         $singlePost = Post::findOrFail($post);
         $singlePost->delete();
-        return redirect()->route('posts.index');
+        return to_route('posts.index');
     }
 }
