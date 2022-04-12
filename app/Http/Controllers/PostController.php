@@ -11,7 +11,7 @@ class PostController extends Controller
     //
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(15);;
         return view('posts.index', [
             'allPosts' => $posts,
         ]);
@@ -52,8 +52,11 @@ class PostController extends Controller
     public function edit($post)
     {
         $singlePost = Post::findOrFail($post);
+        $users = User::all();
+        // dd($singlePost);
         return view('posts.edit', [
-            'post' => $singlePost
+            'post' => $singlePost,
+            'users' => $users,
         ]);
     }
     //update a post
@@ -65,7 +68,7 @@ class PostController extends Controller
             [
                 'title' => $data['title'],
                 'description' => $data['description'],
-                // 'user_id' => $data['post_creator'],
+                'user_id' => $data['post_creator'],
             ]
         );
         return to_route('posts.index');

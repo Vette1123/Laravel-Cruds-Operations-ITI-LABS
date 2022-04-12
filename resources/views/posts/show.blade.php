@@ -43,7 +43,7 @@
         <h5 class="card-title fs-4">
             <span class="fw-bold">Created At:</span>
             <p class="d-inline-block card-text text-muted">
-                {{$posts['created_at']}}
+                {{$posts['created_at']->toDayDateTimeString()}}
             </p>
         </h5>
 

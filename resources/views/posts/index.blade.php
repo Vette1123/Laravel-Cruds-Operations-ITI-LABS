@@ -24,7 +24,7 @@ ITI Blog Post
             <td>{{$post['id']}}</th>
             <td>{{$post['title']}}</td>
             <td>{{$post->user ? $post->user->name : 'Not Found'}}</td>
-            <td>{{$post['created_at']}}</td>
+            <td>{{$post['created_at']->toDateString()}}</td>
             <td>
                 <a href="{{route('posts.show', ['post' => $post['id']])}}" class="btn btn-info mx-1">View</a>
                 <a href="{{route('posts.edit', ['post' => $post['id']])}}" class="btn btn-primary mx-1">Edit</a>
@@ -57,6 +57,8 @@ ITI Blog Post
         @endforeach
     </tbody>
 </table>
+<!-- {{-- Pagination --}} -->
+{{ $allPosts->links() }}
 @endsection
 
 <!-- Modal -->

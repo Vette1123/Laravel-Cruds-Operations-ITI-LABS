@@ -13,6 +13,14 @@
             <label for="exampleFormControlTextarea1" class="form-label">Description</label>
             <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$post->title}}</textarea>
         </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Post Creator</label>
+            <select name="post_creator" class="form-control">
+                @foreach($users as $user)
+                <option value="{{$user->id}}" @if($user->id == $post->user_id) selected @endif >{{$user->name}}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Update Post</button>
     </div>
 </form>
