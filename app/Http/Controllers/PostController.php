@@ -49,17 +49,19 @@ class PostController extends Controller
         ]);
     }
 
-    public function edit($postId)
+    public function edit($post)
     {
+        $singlePost = Post::findOrFail($post);
         return view('posts.edit', [
-            'post' => $postId
+            'post' => $post
         ]);
     }
-    public function destroy($id)
+    //delete a post
+    public function destroy($post)
     {
         // unset($this->posts[$id]);
         // return view('posts.index', ['allPosts' => $this->posts]);
-        $singlePost = Post::findOrFail($id);
+        $singlePost = Post::findOrFail($post);
         $singlePost->delete();
         return redirect()->route('posts.index');
     }
