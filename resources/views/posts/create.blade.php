@@ -3,7 +3,7 @@
 @section('title')Create @endsection
 
 @section('content')
-<form method="POST" action="{{route('posts.store')}}">
+<form method="POST" action="{{route('posts.store')}} ">
     @csrf
     <div class="my-4">
         <label for="exampleFormControlInput1" class="form-label">Title</label>

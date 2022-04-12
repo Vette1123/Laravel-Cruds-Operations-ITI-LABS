@@ -6,9 +6,9 @@ ITI Blog Post
 
 @section('content')
 <div class="d-flex justify-content-end">
-    <a href="{{ route('posts.create') }}" class="mt-4 btn btn-success">Create Post</a>
+    <a href="{{ route('posts.create') }}" class="mt-4 btn btn-lg btn-primary">Create Post</a>
 </div>
-<table class="table mt-4">
+<table class="table mt-4 bg-dark text-white rounded">
     <thead>
         <tr>
             <th scope="col">#</th>
