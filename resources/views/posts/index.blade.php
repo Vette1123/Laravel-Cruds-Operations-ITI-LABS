@@ -58,7 +58,9 @@ ITI Blog Post
     </tbody>
 </table>
 <!-- {{-- Pagination --}} -->
-{{ $allPosts->links() }}
+<div class="text-center ">
+    {{ $allPosts->links() }}
+</div>
 @endsection
 
 <!-- Modal -->
