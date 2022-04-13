@@ -16,7 +16,7 @@ class CommentController extends Controller
         $post->Comments()->create([
             'user_id' => 1,
             'body' => $req->comment,
-            'commentable_id' => (int)$postId,
+            'commentable_id' => $postId,
             'commentable_type' => Post::class,
         ]);
         return redirect('posts/' . $postId);
@@ -33,9 +33,10 @@ class CommentController extends Controller
         $comment = Comment::where('id', $commentId)->first();
         return view('comments.edit', ['post' => $post, 'comment' => $comment]);
     }
-    public function edit($postId, $commentId, Request $req)
+    public function edit($postId, $commentId)
     {
-        $post = Post::find((int) $postId);
+        // $post = Post::find($postId);
+        $req = request();
         Comment::where('id', $commentId)->first()->update([
             'body' => $req->comment
         ]);

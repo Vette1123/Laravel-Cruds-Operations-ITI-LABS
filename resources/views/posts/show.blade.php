@@ -49,7 +49,16 @@
     </div>
 </div>
 <!-- comments -->
-<div class='mt-4'>
+<h1 class="text-center bg-dark text-light rounded p-4">Comments</h1>
+<div>
+    <form method="POST" action={{route('comments.create', ['postId' => $posts['id']])}}>
+        @csrf
+        <label for="exampleFormControlInput1" class="form-label fs-2">Add a comment</label>
+        <input class="form-control form-control-lg" type="text" placeholder="Add a comment" name="comment" id="coment" aria-label=".form-control-lg example">
+        <button type="submit" class="btn btn-primary btn-lg mt-3">Add</button>
+    </form>
+</div>
+<div class='mt-4 bg-light text-dark'>
     @foreach ($posts->comments as $comment)
     <div class='my-4 border p-4 rounded-lg'>
         <h2 class='text-lg fw-bold'>{{$comment->user->name}}</h2>
@@ -59,24 +68,16 @@
             <form class="text-center d-inline" method='POST' action={{route('comments.delete', ['postId' => $posts['id'], 'commentId' => $comment->id])}}>
                 @csrf
                 @method('DELETE')
-                <button type="sumbit" class='btn btn-lg btn-primary'>Delete</button>
+                <button type="sumbit" class='btn btn-lg btn-danger'>Delete</button>
             </form>
-            <a class='btn btn-lg btn-success ml-4' href={{route('comments.view', ['postId' => $posts['id'], 'commentId' => $comment->id])}}>
+            <a class='btn btn-lg btn-primary ml-4' href={{route('comments.view', ['postId' => $posts['id'], 'commentId' => $comment->id])}}>
                 Edit
             </a>
         </div>
     </div>
     @endforeach
-    <div class='flex flex-col mt-6  p-4 rounded-lg'>
-        <form method="POST" class='flex items-center' action={{route('comments.create', ['postId' => $posts['id']])}}>
-            @csrf
-            <label class="label mr-4">Add comment</label>
-            <input class="input flex-1 input-xlg" placeholder="Add comment" type="text" name="comment" id="coment" />
-            <button type="sumbit" class='btn btn-info ml-4'>Add</button>
-        </form>
-    </div>
 </div>
-<div>
+<div class="my-3">
     <a href="{{route('posts.index')}}" class="btn btn-primary btn-lg">Back</a>
 </div>
 
