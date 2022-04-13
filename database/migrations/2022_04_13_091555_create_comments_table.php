@@ -19,8 +19,8 @@ return new class extends Migration
             $table->morphs('commentable');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('commentable_id');
-            $table->string('commentable_type');
+            $table->integer('commentable_id55');
+            $table->string('commentable_type55');
             $table->timestamps();
         });
     }

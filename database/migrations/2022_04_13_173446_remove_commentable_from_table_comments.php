@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        //
         Schema::table('comments', function (Blueprint $table) {
-            $table->dropColumn('commentable_id3');
-            $table->dropColumn('commentable_type4');
+            //
+            $table->dropColumn('commentable_id55');
+            $table->dropColumn('commentable_type55');
         });
     }
 
@@ -27,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('table_comments', function (Blueprint $table) {
+            //
+        });
     }
 };

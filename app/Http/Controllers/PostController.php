@@ -70,12 +70,16 @@ class PostController extends Controller
     {
         $singlePost = Post::findOrFail($post);
         $data = request()->all();
+        $path = Storage::putFile('public', request()->file('image'));
+        $url = Storage::url($path);
+        $slug = SlugService::createSlug(Post::class, 'slug', $data['title']);
         $singlePost->update(
             [
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'user_id' => $data['post_creator'],
-                'image_path' => $data['image'],
+                'slug' => $slug,
+                'image_path' => $url,
             ]
         );
         return to_route('posts.index');
@@ -85,7 +89,13 @@ class PostController extends Controller
     public function destroy($post)
     {
         // Comment::where('id', $commentId)->delete();
+
         $singlePost = Post::findOrFail($post);
+        $location =  $singlePost->image_path;
+        $imageName = basename($location);
+
+        $imageURL = "D:\DOCS MOHMA\iti\OPEN SOURCE\Larvel\Day 1\Lab1\\example-app\storage\app\public" . '\\' . $imageName;
+        unlink($imageURL);
         $singlePost->Comments()->delete();
         $singlePost->delete();
         return to_route('posts.index');
