@@ -48,6 +48,15 @@
         </h5>
     </div>
 </div>
+<!-- image -->
+<div class="card my-4">
+    <div class="card-header fw-bold fs-1">
+        Image
+    </div>
+    <div class="card-body ">
+        <img src="{{$posts['image_path']}}" alt="{{$posts['title']}}" class="img-fluid">
+    </div>
+</div>
 <!-- comments -->
 <h1 class="text-center bg-dark text-light rounded p-4">Comments</h1>
 <div>

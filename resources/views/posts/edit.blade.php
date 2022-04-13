@@ -5,15 +5,19 @@
     @csrf
     @method('PUT')
     <div class="container mt-5">
-        <div class="mb-3">
+        <div class="mb-3 fs-3">
             <label for="exampleFormControlInput1" class="form-label">Title</label>
             <input name="title" type="text" class="form-control" id="exampleFormControlInput1" value="{{$post->title}}">
         </div>
-        <div class="mb-3">
+        <div class="mb-3 fs-3">
             <label for="exampleFormControlTextarea1" class="form-label">Description</label>
             <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$post->title}}</textarea>
         </div>
-        <div class="mb-3">
+        <div class="my-3 fs-3">
+            <input class="form-control form-control-lg" name="image" id="formFileLg" type="file">
+        </div>
+
+        <div class="mb-3 fs-3">
             <label for="exampleFormControlInput1" class="form-label">Post Creator</label>
             <select name="post_creator" class="form-control">
                 @foreach($users as $user)

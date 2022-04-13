@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -29,14 +30,18 @@ class PostController extends Controller
     //to create a new post
     public function store(StorePostRequest $request)
     {
-        //some logic to store data in db
         $data = request()->all();
-        //insert into database
+        $slug = SlugService::createSlug(Post::class, 'slug', $data['title']);
+        $path = Storage::putFile('public', request()->file('image'));
+        $url = Storage::url($path);
+
         Post::create(
             [
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'user_id' => $data['post_creator'],
+                'slug' => $slug,
+                'image_path' => $url,
             ]
         );
         return to_route('posts.index');
@@ -45,7 +50,6 @@ class PostController extends Controller
     public function show($post)
     {
         $post = Post::find($post);
-        // dd($post);
         return view('posts.show', [
             'posts' => $post,
         ]);
@@ -71,6 +75,7 @@ class PostController extends Controller
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'user_id' => $data['post_creator'],
+                'image_path' => $data['image'],
             ]
         );
         return to_route('posts.index');
