@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
@@ -25,7 +27,7 @@ class PostController extends Controller
         ]);
     }
     //to create a new post
-    public function store()
+    public function store(StorePostRequest $request)
     {
         //some logic to store data in db
         $data = request()->all();
@@ -60,7 +62,7 @@ class PostController extends Controller
         ]);
     }
     //update a post
-    public function update($post)
+    public function update(UpdatePostRequest $request, $post)
     {
         $singlePost = Post::findOrFail($post);
         $data = request()->all();
@@ -77,8 +79,10 @@ class PostController extends Controller
     //delete a post
     public function destroy($post)
     {
+        // Comment::where('id', $commentId)->delete();
         $singlePost = Post::findOrFail($post);
-        $singlePost->delete()->comments()->delete();
+        $singlePost->Comments()->delete();
+        $singlePost->delete();
         return to_route('posts.index');
     }
 }
