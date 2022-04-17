@@ -20,6 +20,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->unsignedBigInteger('github_id')->notNullable()->default(0);
+            $table->string('github_token')->notNullable()->default('eksde');
+            $table->string('github_refresh_token')->notNullable()->default('eksde');
             $table->timestamps();
         });
     }
